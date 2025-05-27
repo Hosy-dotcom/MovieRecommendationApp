@@ -8,6 +8,7 @@ import ExplorePage from './pages/ExplorePage';
 import MovieDetailPage from './pages/MovieDetailPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import AccountSettings from './pages/AccountSettingPage';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/movies/:id" element={<MovieDetailPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/account-settings" element={<AccountSettings />} />
       </Routes>
     </div>
   );

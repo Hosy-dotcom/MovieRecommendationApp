@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
-
 /* Base Reset */
 * {
   box-sizing: border-box;
@@ -11,7 +9,7 @@
 .container {
   max-width: 100%;
   padding: 0.5rem 1rem;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: 'Courier New', Courier, monospace;
   display: flex;
   justify-content: center;
   background-color: #f9f9f9;
@@ -78,7 +76,7 @@ select,
   font-size: 1.1rem;
   background-color: white;
   color: black;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: 'Courier New', Courier, monospace;
   width: 100%;
 }
 
@@ -121,7 +119,7 @@ input[type="radio"] {
   color: white;
   border: 2px solid black;
   border-radius: 8px;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: 'Courier New', Courier, monospace;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -154,7 +152,7 @@ ul li button {
   padding: 0.4rem 0.8rem;
   border-radius: 8px;
   cursor: pointer;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 ul li button:hover {
@@ -171,7 +169,7 @@ ul li button:hover {
   color: white;
   border: 3px solid black;
   border-radius: 12px;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: 'Courier New', Courier, monospace;
   cursor: pointer;
   align-self: flex-start;
   transition: all 0.3s ease;

@@ -5,30 +5,37 @@ import { VscArrowLeft } from "react-icons/vsc";
 
 const moodOccasionGenreMap = {
   happy: {
-    family: ["animation", "comedy"],
+    default: ["comedy", "animation", "family"],
+    family: ["animation", "comedy", "family"],
     friends: ["comedy", "adventure"],
     solo: ["comedy", "slice of life"],
     date: ["romance", "comedy"],
   },
   sad: {
+    default: ["drama", "slice of life"],
     solo: ["drama", "slice of life"],
-    friends: ["comedy", "adventure"],
+    friends: ["comedy"],
     family: ["family", "drama"],
     date: ["romance", "drama"],
   },
   romantic: {
+    default: ["romance", "drama"],
     date: ["romance"],
     solo: ["romance", "drama"],
   },
   lazy: {
+    default: ["comedy", "slice of life", "animation"],
     solo: ["comedy", "slice of life"],
-    friends: ["comedy"],
+    friends: ["comedy", "animation"],
   },
   adventurous: {
-    friends: ["adventure", "action"],
-    solo: ["action", "adventure"],
+    default: ["action", "adventure", "fantasy"],
+    friends: ["adventure", "action", "fantasy"],
+    solo: ["action", "adventure", "thriller"],
   },
 };
+
+
 
 const ExplorePage = () => {
   const [activeTab, setActiveTab] = useState("");
@@ -48,9 +55,28 @@ const ExplorePage = () => {
   }, []);
 
   const fetchMovies = async () => {
+    const token = localStorage.getItem("token"); // ✅ Retrieve token
+  
+    if (!token) {
+      alert("Unauthorized: Please log in!");
+      return;
+    }
+  
     try {
-      const response = await fetch("http://localhost:5000/api/movies");
+      const response = await fetch("http://localhost:5000/api/movies", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`, // ✅ Ensure token is sent
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error("Unauthorized or server error");
+      }
+  
       const data = await response.json();
+      
       if (data.success) {
         setMovies(data.data);
         setFilteredMovies(data.data);
@@ -61,18 +87,23 @@ const ExplorePage = () => {
   };
 
   const handleMoodOccasionFilter = () => {
-    const preferredGenres = moodOccasionGenreMap[mood]?.[occasion] || [];
-    if (preferredGenres.length === 0) {
-      setFilteredMovies([]);
-      return;
-    }
+  const preferredGenres =
+    moodOccasionGenreMap[mood]?.[occasion] ||
+    moodOccasionGenreMap[mood]?.["default"] ||
+    [];
 
-    const result = movies.filter((movie) =>
-      movie.genre?.some((g) => preferredGenres.includes(g.toLowerCase()))
-    );
+  if (preferredGenres.length === 0) {
+    setFilteredMovies([]);
+    return;
+  }
 
-    setFilteredMovies(result);
-  };
+  const result = movies.filter((movie) =>
+    movie.genre?.some((g) => preferredGenres.includes(g.toLowerCase()))
+  );
+
+  setFilteredMovies(result);
+};
+
 
   const handleTraditionalFilter = () => {
     const result = movies.filter((movie) => {
@@ -106,7 +137,7 @@ const ExplorePage = () => {
               setStep(1);
             }}
           >
-            🔮 Mood-Based
+            Mood-Based
           </button>
           <button
             className={`tab-btn ${activeTab === "traditional" ? "active" : ""}`}
@@ -115,7 +146,7 @@ const ExplorePage = () => {
               setStep(1);
             }}
           >
-            📚 Traditional
+            Traditional
           </button>
         </div>
 
@@ -196,7 +227,7 @@ const ExplorePage = () => {
                 setStep(0);
               }}
             >
-              🔍 Filter Movies
+              Filter Movies
             </button>
           </div>
         )}

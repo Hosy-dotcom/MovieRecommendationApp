@@ -6,19 +6,29 @@
 
 .back-button {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 10px;
+  left: 10px;
   background: none;
   border: none;
   cursor: pointer;
   color: black;
-  font-size: 1.8rem;
+  padding: 4px;
+  font-size: 0.9rem; /* Adjust this if you're using text */
   transition: transform 0.2s ease, color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Explicitly resize any SVG or icon inside */
+.back-button svg {
+  width: 15px;
+  height: 15px;
 }
 
 .back-button:hover {
   transform: scale(1.1);
-  color: #555;
+  color: #000000;
 }
 
 .series-list {

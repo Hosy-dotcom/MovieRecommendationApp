@@ -8,7 +8,7 @@
   max-width: 1200px;
   margin: auto;
   color: black;
-  font-family: 'Patrick Hand', 'Caveat', 'Comic Neue', cursive;
+  font-family: 'Courier New', Courier, monospace;
   min-height: 100vh;
   padding: 2rem;
 }
@@ -18,11 +18,15 @@
   justify-content: center;
   gap: 1rem;
   margin-bottom: 2rem;
+  
+  
 }
 
 .tab-btn {
   padding: 10px 20px;
   border: 2px solid black;
+  color: #000;
+  background-color: transparent;
   background: white;
   font-weight: bold;
   border-radius: 12px;
@@ -76,7 +80,9 @@
   font-weight: bold;
   cursor: pointer;
   margin-top: 1rem;
+  align-self: center; /* ✅ Add this */
 }
+
 
 .filter-btn:hover {
   background-color: #333;

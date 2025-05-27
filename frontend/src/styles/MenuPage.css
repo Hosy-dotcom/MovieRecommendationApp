@@ -1,41 +1,60 @@
-.menu-container{
-    background-image: url('../../assets/background.png');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    font-family: 'Courier New', Courier, monospace;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .menu-title {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    padding-bottom: 10px;
-  }
-  
-  .menu-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .menu-buttons button {
-    padding: 12px 24px;
-    font-size: 1.2rem;
-    border: 2px solid #000;
-    background-color: transparent;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: inherit;
-  }
-  
-  .menu-buttons button:hover {
-    background-color: #000;
-    color: #fff;
-  }
-  
+/* MenuPage specific styles */
+.menu-container {
+  background-image: url('../../assets/background.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
+  height: 100vh;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  padding: 20px;
+}
+
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-title {
+  font-size: 3.5rem;               /* Bigger font for visibility */
+  font-weight: bold;               /* Make it stand out */
+  color: #000000;                  /* Ensure it's visible on dark or busy backgrounds */
+  text-shadow: 3px 3px 6px rgba(255, 255, 255, 5.2); /* Subtle shadow for contrast */
+  margin-bottom: 2rem;
+  padding: 0 20px;                 /* Optional: side padding for small screens */
+  max-width: 90vw;                 /* Prevent overflow on smaller screens */
+  line-height: 1.2;                /* Tighter vertical spacing */
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+
+}
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center; /* Ensure buttons are centered horizontally */
+}
+
+.menu-buttons button {
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  border: 2px solid #000;
+  background-color: #000;
+  color: #ffffff; /* Add this line */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  width: 200px;
+}
+
+.menu-buttons button:hover {
+  background-color: #ffffff;
+  color: #000000;
+}

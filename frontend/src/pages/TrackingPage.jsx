@@ -16,9 +16,28 @@ const TrackingPage = () => {
   }, []);
 
   const fetchSeries = async () => {
+    const token = localStorage.getItem("token"); // ✅ Retrieve token
+  
+    if (!token) {
+      alert("Unauthorized: Please log in first!");
+      return;
+    }
+  
     try {
-      const response = await fetch("http://localhost:5000/api/movies");
+      const response = await fetch("http://localhost:5000/api/movies", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`, // ✅ Ensure token is sent
+        },
+      });
+  
       const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || "Unauthorized or server error");
+      }
+  
       if (data.success) {
         const seriesData = data.data.filter((item) => item.movie_or_series === "Series");
         const defaultSeasons = {};
@@ -70,19 +89,29 @@ const TrackingPage = () => {
   };
 
   const submitUpdates = async (seriesId) => {
+    const token = localStorage.getItem("token"); // ✅ Retrieve token
+  
+    if (!token) {
+      alert("Unauthorized: Please log in first!");
+      return;
+    }
+  
     if (!pendingUpdates[seriesId]) return;
-
+  
     try {
       await fetch(`http://localhost:5000/api/movies/${seriesId}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`, // ✅ Ensure token is sent
+        },
         body: JSON.stringify({ seasons: pendingUpdates[seriesId] }),
       });
-
+  
       const newPendingUpdates = { ...pendingUpdates };
       delete newPendingUpdates[seriesId];
       setPendingUpdates(newPendingUpdates);
-
+  
       alert("Episodes updated successfully!");
     } catch (error) {
       console.error("Error updating episode status:", error);

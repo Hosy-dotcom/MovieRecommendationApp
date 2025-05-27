@@ -3,13 +3,10 @@ import { createMovie, deleteMovie, getMovies, getMovieById, updateMovie } from "
 import { authenticate } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
-
-router.use(authenticate)
-
-router.get("/", getMovies);
-router.get("/:id", getMovieById);
-router.post("/", createMovie)
-router.put("/:id", updateMovie) //:id dynamic
-router.delete("/:id", deleteMovie);
+router.get("/", authenticate, getMovies);
+router.get("/:id",authenticate, getMovieById);
+router.post("/", authenticate, createMovie)
+router.put("/:id",authenticate, updateMovie) //:id dynamic
+router.delete("/:id",authenticate, deleteMovie);
 
 export default router;

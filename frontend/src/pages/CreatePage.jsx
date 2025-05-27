@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import "../styles/CreatePage.css";
-import { useMovieStore } from "../cinema/movie";
 import { VscArrowLeft } from "react-icons/vsc";
 
 const CreatePage = () => {
@@ -18,57 +17,36 @@ const CreatePage = () => {
 
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [starringInput, setStarringInput] = useState("");
-
-  const { createMovie } = useMovieStore();
   const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewMovie({ ...newMovie, [name]: value });
-  };
+  // ✅ Function to send authenticated movie creation request
+  const createMovie = async (movieData) => {
+    const token = localStorage.getItem("token"); // 🔴 Retrieve JWT token
 
-  const handleCheckboxChange = () => {
-    const toggledIsSeries = !newMovie.isSeries;
-    setNewMovie({
-      ...newMovie,
-      isSeries: toggledIsSeries,
-      numberOfSeasons: 1,
-      episodesPerSeason: toggledIsSeries ? [1] : [],
-    });
-  };
+    if (!token) {
+      alert("Unauthorized: Please log in first!");
+      return { success: false };
+    }
 
-  const handleStarringChange = () => {
-    if (starringInput && !newMovie.starring.includes(starringInput)) {
-      setNewMovie({ ...newMovie, starring: [...newMovie.starring, starringInput] });
-      setStarringInput("");
+
+    try {
+      const response = await fetch("http://localhost:5000/api/movies/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`, // ✅ Sending token in header
+        },
+        body: JSON.stringify(movieData),
+      });
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error creating movie:", error);
+      return { success: false, message: "Server error" };
     }
   };
 
-  const handleRemoveStarring = (index) => {
-    const updated = newMovie.starring.filter((_, i) => i !== index);
-    setNewMovie({ ...newMovie, starring: updated });
-  };
-
-  const handleGenreChange = (selectedOptions) => {
-    setSelectedGenres(selectedOptions);
-    setNewMovie({ ...newMovie, genre: selectedOptions.map((g) => g.value) });
-  };
-
-  const handleSeasonsChange = (e) => {
-    const numSeasons = parseInt(e.target.value, 10);
-    const newEpisodesPerSeason = Array(numSeasons).fill(1);
-    setNewMovie({
-      ...newMovie,
-      numberOfSeasons: numSeasons,
-      episodesPerSeason: newEpisodesPerSeason,
-    });
-  };
-
-  const handleEpisodeCountChange = (index, value) => {
-    const updated = [...newMovie.episodesPerSeason];
-    updated[index] = parseInt(value, 10) || 0;
-    setNewMovie({ ...newMovie, episodesPerSeason: updated });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -93,7 +71,7 @@ const CreatePage = () => {
       seasons,
     };
 
-    const response = await createMovie(movieData);
+    const response = await createMovie(movieData); // ✅ Call authentication-aware function
 
     if (!response.success) {
       alert(response.message);
@@ -113,29 +91,13 @@ const CreatePage = () => {
     setStarringInput("");
   };
 
-  const genreOptions = [
-    { value: "action", label: "Action" },
-    { value: "comedy", label: "Comedy" },
-    { value: "drama", label: "Drama" },
-    { value: "horror", label: "Horror" },
-    { value: "romance", label: "Romance" },
-    { value: "thriller", label: "Thriller" },
-    { value: "sci-fi", label: "Sci-Fi" },
-    { value: "fantasy", label: "Fantasy" },
-    { value: "animation", label: "Animation" },
-    { value: "documentary", label: "Documentary" },
-    { value: "crime", label: "Crime" },
-    { value: "sliceoflife", label: "Slice of Life" },
-  ];
-
   return (
     <div className="container">
-        {/* Back Button */}
-        <div className="back-button" onClick={() => navigate("/")}>
-          <VscArrowLeft size={30} />
-        </div>
+      <div className="back-button" onClick={() => navigate("/")}>
+        <VscArrowLeft size={30} />
+      </div>
       <div className="contents">
-        <h1>Add new movies to your movie list ^_^ </h1>
+        <h1>Add new movies to your movie list ^_^</h1>
 
         <form className="create-form" onSubmit={handleSubmit}>
           {/* Name */}
@@ -145,7 +107,7 @@ const CreatePage = () => {
               type="text"
               name="name"
               value={newMovie.name}
-              onChange={handleInputChange}
+              onChange={(e) => setNewMovie({ ...newMovie, name: e.target.value })}
               placeholder="Enter name"
               required
             />
@@ -160,12 +122,19 @@ const CreatePage = () => {
                 onChange={(e) => setStarringInput(e.target.value)}
                 placeholder="Enter actor's name"
               />
-              <button type="button" onClick={handleStarringChange}>+</button>
+              <button type="button" onClick={() => {
+                if (starringInput && !newMovie.starring.includes(starringInput)) {
+                  setNewMovie({ ...newMovie, starring: [...newMovie.starring, starringInput] });
+                  setStarringInput("");
+                }
+              }}>
+                +
+              </button>
             </div>
             <ul>
               {newMovie.starring.map((s, i) => (
                 <li key={i}>
-                  {s} <button type="button" onClick={() => handleRemoveStarring(i)}>x</button>
+                  {s} <button type="button" onClick={() => setNewMovie({ ...newMovie, starring: newMovie.starring.filter((_, idx) => idx !== i) })}>x</button>
                 </li>
               ))}
             </ul>
@@ -174,7 +143,24 @@ const CreatePage = () => {
           {/* Genre */}
           <div className="form-group">
             <label>Genre:</label>
-            <Select isMulti value={selectedGenres} options={genreOptions} onChange={handleGenreChange} />
+            <Select isMulti value={selectedGenres} options={[
+              { value: "action", label: "Action" },
+              { value: "comedy", label: "Comedy" },
+              { value: "drama", label: "Drama" },
+              { value: "horror", label: "Horror" },
+              { value: "romance", label: "Romance" },
+              { value: "thriller", label: "Thriller" },
+              { value: "sci-fi", label: "Sci-Fi" },
+              { value: "fantasy", label: "Fantasy" },
+              { value: "animation", label: "Animation" },
+              { value: "documentary", label: "Documentary" },
+              { value: "crime", label: "Crime" },
+              { value: "sliceoflife", label: "Slice of Life" },
+            ]}
+            onChange={(selectedOptions) => {
+              setSelectedGenres(selectedOptions);
+              setNewMovie({ ...newMovie, genre: selectedOptions.map((g) => g.value) });
+            }} />
           </div>
 
           {/* Type */}
@@ -182,43 +168,15 @@ const CreatePage = () => {
             <label>Type:</label>
             <div>
               <label>
-                <input type="radio" checked={!newMovie.isSeries} onChange={handleCheckboxChange} />
+                <input type="radio" checked={!newMovie.isSeries} onChange={() => setNewMovie({ ...newMovie, isSeries: false })} />
                 Movie
               </label>
               <label>
-                <input type="radio" checked={newMovie.isSeries} onChange={handleCheckboxChange} />
+                <input type="radio" checked={newMovie.isSeries} onChange={() => setNewMovie({ ...newMovie, isSeries: true, numberOfSeasons: 1, episodesPerSeason: [1] })} />
                 Series
               </label>
             </div>
           </div>
-
-          {/* Series Controls */}
-          {newMovie.isSeries && (
-            <>
-              <div className="form-group">
-                <label>Number of Seasons:</label>
-                <select value={newMovie.numberOfSeasons} onChange={handleSeasonsChange}>
-                  {[...Array(20).keys()].map((i) => (
-                    <option key={i} value={i + 1}>{i + 1}</option>
-                  ))}
-                </select>
-              </div>
-
-              {newMovie.episodesPerSeason.map((val, i) => (
-                <div key={i} className="form-group">
-                  <label>Episodes in Season {i + 1}:</label>
-                  <input
-                    type="number"
-                    min={1}
-                    value={val}
-                    onChange={(e) => handleEpisodeCountChange(i, e.target.value)}
-                    placeholder="e.g., 8"
-                    required
-                  />
-                </div>
-              ))}
-            </>
-          )}
 
           {/* Image */}
           <div className="form-group">
@@ -227,7 +185,7 @@ const CreatePage = () => {
               type="text"
               name="image"
               value={newMovie.image}
-              onChange={handleInputChange}
+              onChange={(e) => setNewMovie({ ...newMovie, image: e.target.value })}
               placeholder="Enter image URL"
             />
           </div>

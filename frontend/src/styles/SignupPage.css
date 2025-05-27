@@ -1,0 +1,162 @@
+/* Base Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main Container */
+.signup-container {
+  max-width: 100%;
+  padding: 0.5rem 1rem;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* This centers the box vertically */
+  height: 100vh; /* Make the container take the full height of the viewport */
+  background-image: url('../../assets/background.png');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Content Box */
+.contents {
+  width: 100%;
+  max-width: 800px;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 3px solid black;
+  box-shadow: 8px 8px 0 black;
+  /* The background image is now removed from here */
+}
+
+/* Headings */
+h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: black;
+  margin-bottom: 1.5rem;
+}
+
+/* Form Styles */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Form Groups */
+.form-group {
+  display: flex;
+  align-items: center; /* Vertically center text and inputs */
+  justify-content: flex-start; /* Ensure items are aligned to the left */
+  width: 100%;
+  gap: 1rem; /* Space between label and input */
+}
+
+.form-group label {
+  flex: 0 0 150px; /* Fixed width for labels */
+  font-weight: bold;
+  color: black;
+  font-size: 1.2rem;
+}
+
+.form-group input {
+  flex: 1; /* Let inputs take the remaining space */
+  width: auto; /* Prevent inputs from stretching too much */
+  padding: 0.8rem 1rem;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  background-color: white;
+  color: black;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+}
+
+/* Submit Button */
+.submit-btn {
+  padding: 1rem 2rem;
+  font-size: 1.3rem;
+  background-color: black;
+  color: white;
+  border: 3px solid black;
+  border-radius: 12px;
+  font-family: 'Courier New', Courier, monospace;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: white;
+  color: black;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .contents {
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .form-group > div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .submit-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    font-size: 1rem;
+  }
+
+  .submit-btn {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.2rem;
+  }
+}
+
+/* Back Button */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: black; /* Set black background */
+  color: white; /* Set white text */
+  border: 3px solid black; /* Keep black border */
+  border-radius: 12px; /* Same rounded corners */
+  padding: 1rem 2rem; /* Same padding as submit button */
+  font-size: 1.3rem; /* Match font size to the submit button */
+  font-family: 'Courier New', Courier, monospace;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Same transition effect */
+}
+
+.back-button:hover {
+  background-color: white; /* Change background on hover */
+  color: black; /* Change text color on hover */
+}
+

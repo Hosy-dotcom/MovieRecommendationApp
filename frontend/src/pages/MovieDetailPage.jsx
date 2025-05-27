@@ -10,8 +10,27 @@ const MovieDetailPage = () => {
 
   useEffect(() => {
     const fetchMovie = async () => {
+      const token = localStorage.getItem("token"); // ✅ Retrieve token
+
+      if (!token) {
+        alert("Unauthorized: Please log in first!");
+        setLoading(false);
+        return;
+      }
+
       try {
-        const response = await fetch(`http://localhost:5000/api/movies/${id}`);
+        const response = await fetch(`http://localhost:5000/api/movies/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`, // ✅ Ensure token is sent
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Unauthorized or movie not found.");
+        }
+
         const data = await response.json();
         console.log("Fetched movie data:", data);
 
@@ -40,11 +59,7 @@ const MovieDetailPage = () => {
           ← Back to Explore
         </button>
         <div className="movie-content">
-          <img
-            src={movie.image}
-            alt={movie.name}
-            className="movie-image"
-          />
+          <img src={movie.image} alt={movie.name} className="movie-image" />
           <div className="movie-info">
             <h1 className="movie-title">{movie.name}</h1>
             <p className="movie-detail-text">
@@ -59,24 +74,23 @@ const MovieDetailPage = () => {
 
             {/* Show Seasons and Episodes if available */}
             {movie.movie_or_series === "Series" && movie.seasons && movie.seasons.length > 0 && (
-  <div className="seasons-section">
-    <h2 className="seasons-title">Seasons and Episodes</h2>
-    {movie.seasons.map((season, seasonIndex) => (
-      <div key={seasonIndex} className="season-block">
-        <h3 className="season-title">Season {season.season_number}</h3>
-        <ul className="episode-list">
-          {season.episodes.map((episode, episodeIndex) => (
-            <li key={episodeIndex} className={`episode-item ${episode.watched ? "watched" : ""}`}>
-              <span>Episode {episode.episode_number}</span>
-              {episode.watched && <span className="watched-label">✔ Watched</span>}
-            </li>
-          ))}
-        </ul>
-      </div>
-    ))}
-  </div>
-)}
-
+              <div className="seasons-section">
+                <h2 className="seasons-title">Seasons and Episodes</h2>
+                {movie.seasons.map((season, seasonIndex) => (
+                  <div key={seasonIndex} className="season-block">
+                    <h3 className="season-title">Season {season.season_number}</h3>
+                    <ul className="episode-list">
+                      {season.episodes.map((episode, episodeIndex) => (
+                        <li key={episodeIndex} className={`episode-item ${episode.watched ? "watched" : ""}`}>
+                          <span>Episode {episode.episode_number}</span>
+                          {episode.watched && <span className="watched-label">✔ Watched</span>}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

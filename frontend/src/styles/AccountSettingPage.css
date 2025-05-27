@@ -1,0 +1,93 @@
+.account-settings-background {
+  min-height: 100vh;
+  background-image: url('../../assets/background.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.account-settings-container {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  border: 2px solid black;
+  border-radius: 12px;
+  box-shadow: 6px 6px 0 black;
+  padding: 2rem;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.account-settings-container h2 {
+  margin-bottom: 1.5rem;
+}
+
+.action-btn {
+  background-color: black;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.form-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.form-box input {
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 8px;
+  font-family: inherit;
+
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.form-actions button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+.form-actions button:first-child {
+  background-color: #000000;
+  color: white;
+}
+
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 8px 16px;
+  background-color: #000000;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  z-index: 1000;
+}
+
+.back-btn:hover {
+  background-color: #ffffff;
+}

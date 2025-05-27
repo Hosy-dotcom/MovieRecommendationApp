@@ -27,8 +27,9 @@ const LoginPage = () => {
       const data = await res.json();
       if (data.success) {
         alert("Login successful!");
-        localStorage.setItem("token", data.token); // Optional: store token
-        navigate("/"); // ✅ redirect to homepage
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("username", data.username);
+        navigate("/"); 
       } else {
         alert(data.message || "Login failed");
       }
@@ -40,12 +41,17 @@ const LoginPage = () => {
 
   return (
     <div className="login-container">
-      <h2>Log In</h2>
-      <form onSubmit={handleLogin}>
-        <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
-        <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
-        <button type="submit">Login</button>
-      </form>
+       <div className="back-button" onClick={() => navigate("/menu")}>
+        &larr; Back
+      </div>
+      <div className="contents">
+        <h2>Log In</h2>
+        <form onSubmit={handleLogin}>
+          <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
+          <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
+          <button type="submit">Login</button>
+        </form>
+      </div>
     </div>
   );
 };
