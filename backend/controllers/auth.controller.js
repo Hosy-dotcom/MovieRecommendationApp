@@ -52,8 +52,8 @@ export const signin = async (req, res) => {
 
     res.json({
       success: true,
-      message: "Login successful",
-      token,
+      message: "Login successful", 
+      token, //this is main
       username: user.username
     });
   } catch (err) {
