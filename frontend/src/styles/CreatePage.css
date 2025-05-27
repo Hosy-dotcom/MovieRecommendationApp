@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+/* Base Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main Container */
+.container {
+  max-width: 100%;
+  padding: 0.5rem 1rem;
+  font-family: 'Shadows Into Light', cursive;
+  display: flex;
+  justify-content: center;
+  background-color: #f9f9f9;
+}
+
+/* Content Box */
+.contents {
+  width: 100%;
+  max-width: 800px;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 3px solid black;
+  box-shadow: 8px 8px 0 black;
+}
+
+/* Headings */
+h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: black;
+  margin-bottom: 1.5rem;
+}
+
+/* Form Styles */
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Form Groups */
+.form-group {
+  display: flex;
+  align-items: center; /* Vertically center text and inputs */
+  justify-content: flex-start; /* Ensure items are aligned to the left */
+  width: 100%;
+  gap: 1rem; /* Space between label and input */
+}
+
+.form-group label {
+  flex: 0 0 150px; /* Fixed width for labels */
+  font-weight: bold;
+  color: black;
+  font-size: 1.2rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group .starring-input {
+  flex: 1; /* Let inputs take the remaining space */
+  width: auto; /* Prevent inputs from stretching too much */
+}
+
+
+/* Inputs and Selects */
+input[type="text"],
+input[type="number"],
+select,
+.starring-input input {
+  padding: 0.8rem 1rem;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  background-color: white;
+  color: black;
+  font-family: 'Shadows Into Light', cursive;
+  width: 100%;
+}
+
+.form-group select {
+  width: 100%; /* Ensure the select box takes up full width */
+}
+
+.form-group > div {
+  display: flex;
+  align-items: center; /* Vertically center the radio buttons */
+  gap: 1rem;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+}
+
+input[type="radio"] {
+  margin-right: 0.5rem;
+  accent-color: black;
+}
+
+/* Starring Input */
+.starring-input {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.starring-input input {
+  flex: 1;
+}
+
+.starring-input button {
+  padding: 0.6rem 1rem;
+  background-color: black;
+  color: white;
+  border: 2px solid black;
+  border-radius: 8px;
+  font-family: 'Shadows Into Light', cursive;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.starring-input button:hover {
+  background-color: white;
+  color: black;
+}
+
+/* Starring List */
+ul {
+  list-style: none;
+  margin-top: 0.5rem;
+  padding-left: 0;
+}
+
+ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0;
+  color: black;
+  font-size: 1.1rem;
+}
+
+ul li button {
+  background: black;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Shadows Into Light', cursive;
+}
+
+ul li button:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+/* Submit Button */
+.submit-btn {
+  padding: 1rem 2rem;
+  font-size: 1.3rem;
+  background-color: black;
+  color: white;
+  border: 3px solid black;
+  border-radius: 12px;
+  font-family: 'Shadows Into Light', cursive;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: white;
+  color: black;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .contents {
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .form-group > div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .submit-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .starring-input {
+    flex-direction: column;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    font-size: 1rem;
+  }
+
+  .submit-btn {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.2rem;
+  }
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: solid 2px black;
+  border-radius: 8px;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  color: black;
+  font-size: 1.8rem;
+  font-weight: bold;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+  color: #555;
+}
