@@ -121,15 +121,18 @@ const TrackingPage = () => {
   if (loading) return <p>Loading series...</p>;
 
   return (
-    <div className="tracking-page">
-      {/* Back Button */}
-      <div className="back-button" onClick={() => navigate("/")}>
-        <VscArrowLeft size={30} />
-      </div>
+  <div className="tracking-page">
+    {/* Back Button */}
+    <div className="back-button" onClick={() => navigate("/home")}>
+      <VscArrowLeft size={30} />
+    </div>
 
-      {/* Series list wrapper */}
-      <div className="series-list">
-        {series.map((show) => {
+    {/* Series list wrapper */}
+    <div className="series-list">
+      {series.length === 0 ? (
+        <p className="empty-message">No series found. Start adding your favorites to track progress!</p>
+      ) : (
+        series.map((show) => {
           const hasMultipleSeasons = show.seasons.length > 1;
           const selectedSeason = selectedSeasons[show._id] || 1;
           const selectedSeasonIndex = selectedSeason - 1;
@@ -178,10 +181,12 @@ const TrackingPage = () => {
               </div>
             </div>
           );
-        })}
-      </div>
+        })
+      )}
     </div>
-  );
+  </div>
+);
+
 };
 
 export default TrackingPage;

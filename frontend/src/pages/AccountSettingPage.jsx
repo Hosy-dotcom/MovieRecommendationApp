@@ -87,7 +87,7 @@ const AccountSettings = () => {
   return (
     <div className="account-settings-background">
       {/* Back button OUTSIDE container */}
-      <button className="back-btn" onClick={() => navigate("/")}>
+      <button className="back-btn" onClick={() => navigate("/home")}>
         &larr; Back
       </button>
 

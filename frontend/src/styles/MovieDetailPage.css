@@ -19,16 +19,21 @@
   .movie-back-button {
     margin-bottom: 1.5rem;
     font-size: 1rem;
-    color: #000;
-    background: none;
-    border: none;
+    color: #ffffff;
+    background: #000;
+    border: 1px solid #000;
+    border-radius: 6px;
+    padding: 1em;
     cursor: pointer;
-    text-decoration: underline;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, color 0.2s ease;
   }
   
   .movie-back-button:hover {
-    color: gray;
+    color: rgb(0, 0, 0);
   }
   
   .movie-content {

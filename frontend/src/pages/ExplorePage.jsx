@@ -122,7 +122,7 @@ const ExplorePage = () => {
   return (
     <div className="explore-page">
        {/* Back Button */}
-            <div className="back-button" onClick={() => navigate("/")}>
+            <div className="back-button" onClick={() => navigate("/home")}>
               <VscArrowLeft size={30} />
             </div>
       <div className="p-6 explore-container">
@@ -235,7 +235,7 @@ const ExplorePage = () => {
         {/* Movie Grid */}
         <div className="movie-grid">
           {filteredMovies.length === 0 ? (
-            <p>No matching movies found.</p>
+            <p className="empty-message">No matching movies found.</p>
           ) : (
             filteredMovies.map((movie) => (
               <div

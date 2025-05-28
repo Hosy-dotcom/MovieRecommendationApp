@@ -29,7 +29,7 @@ const LoginPage = () => {
         alert("Login successful!");
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", data.username);
-        navigate("/"); 
+        navigate("/home"); 
       } else {
         alert(data.message || "Login failed");
       }
