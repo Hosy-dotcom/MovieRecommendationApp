@@ -118,18 +118,18 @@ const CreatePage = () => {
 
 
   const genreOptions = [
-    { value: "action", label: "Action" },
-    { value: "comedy", label: "Comedy" },
-    { value: "drama", label: "Drama" },
-    { value: "horror", label: "Horror" },
-    { value: "romance", label: "Romance" },
-    { value: "thriller", label: "Thriller" },
-    { value: "sci-fi", label: "Sci-Fi" },
-    { value: "fantasy", label: "Fantasy" },
-    { value: "animation", label: "Animation" },
-    { value: "documentary", label: "Documentary" },
-    { value: "crime", label: "Crime" },
-    { value: "sliceoflife", label: "Slice of Life" },
+    { value: "Action", label: "Action" },
+    { value: "Comedy", label: "Comedy" },
+    { value: "Drama", label: "Drama" },
+    { value: "Horror", label: "Horror" },
+    { value: "Romance", label: "Romance" },
+    { value: "Thriller", label: "Thriller" },
+    { value: "Sci-fi", label: "Sci-Fi" },
+    { value: "Fantasy", label: "Fantasy" },
+    { value: "Animation", label: "Animation" },
+    { value: "Documentary", label: "Documentary" },
+    { value: "Crime", label: "Crime" },
+    { value: "Sliceoflife", label: "Slice of Life" },
   ];
 
   return (

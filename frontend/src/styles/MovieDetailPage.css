@@ -139,6 +139,46 @@
     border-radius: 0.5rem;
     font-size: 0.75rem;
   }
+
+  .movie-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+
+.edit-button,
+.delete-button,
+.save-button,
+.cancel-button {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.edit-button { background-color: #ffffff; color: rgb(0, 0, 0); }
+.delete-button { background-color: #ffffff; color: rgb(0, 0, 0); }
+.save-button { background-color: #000000; color: white; }
+.cancel-button { background-color: #000000; color: white; }
+.edit-input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+  .edit-button:hover, .delete-button:hover {
+    background-color: #000000;
+    color: #ffffff;
+  }
+  .save-button:hover, .cancel-button:hover {
+    background-color: #ffffff;
+    color: #000000;
+  }
+
   
   /* Responsive (Mobile) */
   @media (max-width: 768px) {
