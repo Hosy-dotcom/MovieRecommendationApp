@@ -160,3 +160,24 @@ input:focus {
   color: black; /* Change text color on hover */
 }
 
+
+@media (max-width: 1200px) {
+  .signup-container {
+    background-size: contain;
+    background-position: center top;
+    background-repeat: repeat-y;
+    max-height: 100vh;
+    width: 100vw;
+    box-sizing: border-box
+  }
+}
+
+/* Responsive (Mobile) */
+@media (max-width: 768px) {
+
+.signup-container {
+    background-size: contain;
+    background-position: center top;
+    background-repeat: repeat-y;
+  }
+}

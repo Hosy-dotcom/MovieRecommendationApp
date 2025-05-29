@@ -5,6 +5,13 @@
   padding: 0;
 }
 
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  /* Prevent double scrollbars */
+}
+
 /* Main Container */
 .container {
   max-width: 100%;
@@ -13,18 +20,24 @@
   display: flex;
   justify-content: center;
   background-color: #f9f9f9;
+
 }
 
 /* Content Box */
 .contents {
-  width: 100%;
+  margin: 2rem;
+  /* Add vertical margin for spacing in scroll view */
   max-width: 800px;
+  width: 80%;
   background-color: white;
-  padding: 1rem;
+  padding-right: 5rem;
   border-radius: 12px;
   border: 3px solid black;
   box-shadow: 8px 8px 0 black;
+  box-sizing: border-box;
+  overflow-y: scroll;
 }
+
 
 /* Headings */
 h1 {
@@ -44,14 +57,18 @@ h1 {
 /* Form Groups */
 .form-group {
   display: flex;
-  align-items: center; /* Vertically center text and inputs */
-  justify-content: flex-start; /* Ensure items are aligned to the left */
+  align-items: center;
+  /* Vertically center text and inputs */
+  justify-content: flex-start;
+  /* Ensure items are aligned to the left */
   width: 100%;
-  gap: 1rem; /* Space between label and input */
+  gap: 1rem;
+  /* Space between label and input */
 }
 
 .form-group label {
-  flex: 0 0 150px; /* Fixed width for labels */
+  flex: 0 0 150px;
+  /* Fixed width for labels */
   font-weight: bold;
   color: black;
   font-size: 1.2rem;
@@ -60,8 +77,10 @@ h1 {
 .form-group input,
 .form-group select,
 .form-group .starring-input {
-  flex: 1; /* Let inputs take the remaining space */
-  width: auto; /* Prevent inputs from stretching too much */
+  flex: 1;
+  /* Let inputs take the remaining space */
+  width: auto;
+  /* Prevent inputs from stretching too much */
 }
 
 
@@ -81,19 +100,21 @@ select,
 }
 
 .form-group select {
-  width: 100%; /* Ensure the select box takes up full width */
+  width: 100%;
+  /* Ensure the select box takes up full width */
 }
 
-.form-group > div {
+.form-group>div {
   display: flex;
-  align-items: center; /* Vertically center the radio buttons */
+  align-items: center;
+  /* Vertically center the radio buttons */
   gap: 1rem;
 }
 
 input:focus,
 select:focus {
   outline: none;
-  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 input[type="radio"] {
@@ -122,6 +143,7 @@ input[type="radio"] {
   font-family: 'Courier New', Courier, monospace;
   cursor: pointer;
   transition: all 0.2s ease;
+
 }
 
 .starring-input button:hover {
@@ -180,60 +202,55 @@ ul li button:hover {
   color: black;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .contents {
-    padding: 1.5rem;
-  }
-
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  .form-group > div {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .submit-btn {
-    width: 100%;
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .starring-input {
-    flex-direction: column;
-  }
-
-  input[type="text"],
-  input[type="number"],
-  select {
-    font-size: 1rem;
-  }
-
-  .submit-btn {
-    font-size: 1.1rem;
-    padding: 0.8rem 1.2rem;
-  }
-}
 
 .back-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
+  position: sticky;
+  top: 1rem;
+  /* Distance from top of scrollable container */
+  align-self: flex-start;
+  /* Stick to the left inside flex container */
   background: none;
   border: solid 2px black;
   border-radius: 8px;
   padding: 0.3rem 0.6rem;
   cursor: pointer;
   color: black;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: bold;
   transition: transform 0.2s ease, color 0.2s ease;
+  z-index: 10;
+  /* Make sure it stays above other content */
+  margin-bottom: 1rem;
+  /* Add spacing from content */
 }
+
 
 .back-button:hover {
   transform: scale(1.1);
   color: #555;
+}
+
+@media (max-width: 768px) {
+  .form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group label {
+    margin-bottom: -108rem;
+    text-align: left;
+  }
+  .form-group button {
+    max-width: fit-content;
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .starring-input button,
+  .starring-input input {
+    margin-bottom: -0.5rem;
+  }
 }

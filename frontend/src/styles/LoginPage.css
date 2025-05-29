@@ -114,3 +114,23 @@ button:hover {
     padding: 0.8rem 1.2rem;
   }
 }
+
+@media (max-width: 1200px) {
+  .login-container {
+    background-size: contain;
+    background-position: center top;
+    background-repeat: repeat-y;
+    max-height: 100vh; /* Ensure full height, even if content grows */
+    width: 100vw;       /* Ensure full width */
+    box-sizing : border-box
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+.login-container {
+    background-size: contain;
+    background-position: center top;
+    background-repeat: repeat-y;
+  }
+}

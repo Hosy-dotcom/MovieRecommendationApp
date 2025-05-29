@@ -70,51 +70,51 @@ const CreatePage = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const imageUrl = newMovie.image.trim() !== "" ? newMovie.image.trim() : "../../assets/placeholder.jpg";
-  const seasons = newMovie.isSeries
-    ? newMovie.episodesPerSeason.map((count, index) => ({
+    const imageUrl = newMovie.image.trim() !== "" ? newMovie.image.trim() : "../../assets/placeholder.jpg";
+    const seasons = newMovie.isSeries
+      ? newMovie.episodesPerSeason.map((count, index) => ({
         season_number: index + 1,
         episodes: Array.from({ length: count }, (_, i) => ({
           episode_number: i + 1,
           watched: false,
         })),
       }))
-    : [];
+      : [];
 
-  const movieData = {
-    name: newMovie.name.trim(),
-    starrings: newMovie.starring.map((s) => s.trim()),
-    genre: newMovie.genre,
-    movie_or_series: newMovie.isSeries ? "Series" : "Movie",
-    image: imageUrl,
-    seasons,
+    const movieData = {
+      name: newMovie.name.trim(),
+      starrings: newMovie.starring.map((s) => s.trim()),
+      genre: newMovie.genre,
+      movie_or_series: newMovie.isSeries ? "Series" : "Movie",
+      image: imageUrl,
+      seasons,
+    };
+
+    const response = await createMovie(movieData);
+
+    if (!response.success) {
+      alert(response.message);
+      return;
+    }
+
+    // Success alert here
+    alert("Movie created successfully!");
+
+    // Reset form
+    setNewMovie({
+      name: "",
+      starring: [],
+      genre: [],
+      isSeries: false,
+      image: "",
+      numberOfSeasons: 1,
+      episodesPerSeason: [],
+    });
+    setSelectedGenres([]);
+    setStarringInput("");
   };
-
-  const response = await createMovie(movieData);
-
-  if (!response.success) {
-    alert(response.message);
-    return;
-  }
-
-  // Success alert here
-  alert("Movie created successfully!");
-
-  // Reset form
-  setNewMovie({
-    name: "",
-    starring: [],
-    genre: [],
-    isSeries: false,
-    image: "",
-    numberOfSeasons: 1,
-    episodesPerSeason: [],
-  });
-  setSelectedGenres([]);
-  setStarringInput("");
-};
 
 
   const genreOptions = [
@@ -143,7 +143,9 @@ const CreatePage = () => {
         <form className="create-form" onSubmit={handleSubmit}>
           {/* Name */}
           <div className="form-group">
-            <label>Name:</label>
+            <label>
+              Name:
+            </label>
             <input
               type="text"
               name="name"

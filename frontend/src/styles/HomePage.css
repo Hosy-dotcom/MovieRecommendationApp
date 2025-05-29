@@ -69,11 +69,13 @@ body, html {
 }
 
 .account-button {
-  background: none;
+  background: rgb(255, 255, 255);
   border: none;
+  border-radius: 100%;
+  padding: 10px 15px;
   cursor: pointer;
   font-size: 40px;
-  color: #797979;
+  color: #000000;
 }
 
 .account-button:hover {
@@ -121,4 +123,24 @@ body, html {
 
 .logout {
   color: red;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    background-size: contain;
+    background-position: center top;
+    background-repeat: repeat-y;
+    max-height: 100vh; /* Ensure full height, even if content grows */
+    width: 100vw;       /* Ensure full width */
+    box-sizing : border-box
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+.container {
+    background-size: contain;
+    background-position: center top;
+    background-repeat: repeat-y;
+  }
 }

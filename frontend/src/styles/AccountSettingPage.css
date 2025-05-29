@@ -10,6 +10,7 @@
 
 .account-settings-container {
   width: 100%;
+  margin: 2rem;
   max-width: 500px;
   background: white;
   border: 2px solid black;
@@ -72,6 +73,12 @@
   color: white;
 }
 
+.error-text {
+  color: #e63946;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
 
 .back-btn {
   position: absolute;
@@ -84,10 +91,36 @@
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  white-space: nowrap;       /* Prevent text from wrapping */
+  max-width: fit-content;    /* Prevent elongation */
+  font-size: 1rem;           /* Responsive-friendly font */
+  transition: background-color 0.3s ease, color 0.3s ease;
   z-index: 1000;
 }
 
+
 .back-btn:hover {
   background-color: #ffffff;
+}
+
+
+@media (max-width: 1200px) {
+  .account-settings-background {
+    background-size: contain;
+    background-position: center top;
+    background-repeat: repeat-y;
+    max-height: 100vh;
+    width: 100vw;
+    box-sizing: border-box
+  }
+}
+
+/* Responsive (Mobile) */
+@media (max-width: 768px) {
+
+.account-settings-background {
+    background-size: contain;
+    background-position: center top;
+    background-repeat: repeat-y;
+  }
 }

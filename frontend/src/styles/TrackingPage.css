@@ -5,6 +5,7 @@
   background-attachment: fixed;
   min-height: 100vh;
   padding: 1rem;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .back-button {
@@ -48,6 +49,8 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 60px);
 }
 
 .series-card {
@@ -135,8 +138,25 @@
   cursor: not-allowed;
 }
 
+@media (max-width: 1200px) {
+  .tracking-page {
+    background-size: contain;
+    background-position: center top;
+    background-repeat: repeat-y;
+    max-height: 100vh; /* Ensure full height, even if content grows */
+    width: 100vw;       /* Ensure full width */
+    box-sizing : border-box
+  }
+}
+
 /* Responsive tweaks */
 @media (max-width: 768px) {
+.tracking-page {
+    background-size: contain;
+    background-position: center top;
+    background-repeat: repeat-y;
+  }
+
   .series-card {
     flex-direction: column;
     align-items: center;

@@ -4,20 +4,20 @@ import Select from "react-select";
 import "../styles/MovieDetailPage.css";
 
 const genreOptions = [
-    { value: "Action", label: "Action" },
-    { value: "Comedy", label: "Comedy" },
-    { value: "Drama", label: "Drama" },
-    { value: "Horror", label: "Horror" },
-    { value: "Romance", label: "Romance" },
-    { value: "Thriller", label: "Thriller" },
-    { value: "Sci-fi", label: "Sci-Fi" },
-    { value: "Fantasy", label: "Fantasy" },
-    { value: "Animation", label: "Animation" },
-    { value: "Documentary", label: "Documentary" },
-    { value: "Crime", label: "Crime" },
-    { value: "Sliceoflife", label: "Slice of Life" },
-  ];
-  
+  { value: "Action", label: "Action" },
+  { value: "Comedy", label: "Comedy" },
+  { value: "Drama", label: "Drama" },
+  { value: "Horror", label: "Horror" },
+  { value: "Romance", label: "Romance" },
+  { value: "Thriller", label: "Thriller" },
+  { value: "Sci-fi", label: "Sci-Fi" },
+  { value: "Fantasy", label: "Fantasy" },
+  { value: "Animation", label: "Animation" },
+  { value: "Documentary", label: "Documentary" },
+  { value: "Crime", label: "Crime" },
+  { value: "Sliceoflife", label: "Slice of Life" },
+];
+
 const MovieDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -154,8 +154,9 @@ const MovieDetailPage = () => {
         </button>
 
         <div className="movie-content">
-          <img src={movie.image} alt={movie.name} className="movie-image" />
-
+          <div class="image-wrapper">
+            <img src={movie.image} alt={movie.name} className="movie-image" />
+          </div>
           <div className="movie-info">
             <div className="movie-actions">
               {!editMode && <button onClick={handleEdit} className="edit-button">Edit</button>}
@@ -221,6 +222,7 @@ const MovieDetailPage = () => {
                       +
                     </button>
                   </div>
+
                   <ul>
                     {formData.starrings?.map((s, i) => (
                       <li key={i}>

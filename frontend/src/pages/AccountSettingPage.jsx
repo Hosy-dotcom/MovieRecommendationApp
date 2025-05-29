@@ -123,30 +123,37 @@ const AccountSettings = () => {
         </button>
 
         {showPasswordForm && (
-          <div className="form-box">
-            <input
-              type="password"
-              placeholder="Current Password"
-              value={oldPassword}
-              onChange={(e) => setOldPassword(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="New Password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Confirm New Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            <div className="form-actions">
-              <button onClick={handlePasswordChange}>Change</button>
-            </div>
-          </div>
-        )}
+  <div className="form-box">
+    <input
+      type="password"
+      placeholder="Current Password"
+      value={oldPassword}
+      onChange={(e) => setOldPassword(e.target.value)}
+    />
+    <input
+      type="password"
+      placeholder="New Password"
+      value={newPassword}
+      onChange={(e) => setNewPassword(e.target.value)}
+    />
+    <input
+      type="password"
+      placeholder="Confirm New Password"
+      value={confirmPassword}
+      onChange={(e) => setConfirmPassword(e.target.value)}
+    />
+
+    {/* Password mismatch warning */}
+    {newPassword && confirmPassword && newPassword !== confirmPassword && (
+      <p className="error-text">Passwords do not match.</p>
+    )}
+
+    <div className="form-actions">
+      <button onClick={handlePasswordChange}>Change</button>
+    </div>
+  </div>
+)}
+
       </div>
     </div>
   );
