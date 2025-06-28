@@ -16,7 +16,7 @@ const TrackingPage = () => {
   }, []);
 
   const fetchSeries = async () => {
-    const token = localStorage.getItem("token"); // ✅ Retrieve token
+    const token = localStorage.getItem("token"); 
   
     if (!token) {
       alert("Unauthorized: Please log in first!");
@@ -28,7 +28,7 @@ const TrackingPage = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`, // ✅ Ensure token is sent
+          "Authorization": `Bearer ${token}`, 
         },
       });
   
@@ -69,12 +69,10 @@ const TrackingPage = () => {
     const clickedEpisode = episodes[episodeIndex];
 
     if (clickedEpisode.watched) {
-      // Unwatch clicked and all after
       for (let i = episodeIndex; i < episodes.length; i++) {
         episodes[i].watched = false;
       }
     } else {
-      // Watch clicked and all before
       for (let i = 0; i <= episodeIndex; i++) {
         episodes[i].watched = true;
       }
@@ -89,7 +87,7 @@ const TrackingPage = () => {
   };
 
   const submitUpdates = async (seriesId) => {
-    const token = localStorage.getItem("token"); // ✅ Retrieve token
+    const token = localStorage.getItem("token"); 
   
     if (!token) {
       alert("Unauthorized: Please log in first!");
@@ -103,7 +101,7 @@ const TrackingPage = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`, // ✅ Ensure token is sent
+          "Authorization": `Bearer ${token}`, 
         },
         body: JSON.stringify({ seasons: pendingUpdates[seriesId] }),
       });

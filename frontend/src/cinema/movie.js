@@ -16,7 +16,7 @@ export const useMovieStore = create((set) => ({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}` // ✅ Include token here
+        "Authorization": `Bearer ${token}` 
       },
       body: JSON.stringify(newMovie),
     });

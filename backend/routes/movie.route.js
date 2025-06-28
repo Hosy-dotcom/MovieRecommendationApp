@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/", authenticate, getMovies);
 router.get("/:id",authenticate, getMovieById);
 router.post("/", authenticate, createMovie)
-router.put("/:id",authenticate, updateMovie) //:id dynamic
+router.put("/:id",authenticate, updateMovie) 
 router.delete("/:id",authenticate, deleteMovie);
 
 export default router;

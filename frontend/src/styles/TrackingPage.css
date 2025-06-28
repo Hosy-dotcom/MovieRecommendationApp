@@ -1,6 +1,6 @@
 .tracking-page {
   background-image: url('../../assets/background.png');
-  background-size: cover; /* Changed to cover for better scaling */
+  background-size: cover; 
   background-repeat: no-repeat;
   background-attachment: fixed;
   min-height: 100vh;
@@ -143,13 +143,12 @@
     background-size: contain;
     background-position: center top;
     background-repeat: repeat-y;
-    max-height: 100vh; /* Ensure full height, even if content grows */
-    width: 100vw;       /* Ensure full width */
+    max-height: 100vh; 
+    width: 100vw;     
     box-sizing : border-box
   }
 }
 
-/* Responsive tweaks */
 @media (max-width: 768px) {
 .tracking-page {
     background-size: contain;

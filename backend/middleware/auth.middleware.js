@@ -12,7 +12,7 @@ export const authenticate = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (process.env.NODE_ENV === "development") {
-    console.log("Incoming Auth Header:", authHeader); // 🟡 Debug
+    console.log("Incoming Auth Header:", authHeader);
   }
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -28,7 +28,7 @@ export const authenticate = (req, res, next) => {
     const decoded = jwt.verify(token, JWT_SECRET);
 
     if (process.env.NODE_ENV === "development") {
-      console.log("Decoded Token:", decoded); // 🟡 Debug
+      console.log("Decoded Token:", decoded); 
     }
 
     req.user = decoded;

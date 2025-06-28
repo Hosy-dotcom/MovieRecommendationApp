@@ -36,11 +36,11 @@ export const getMovies = async (req, res) => {
   };
   
 
-// ✅ Create a Movie (ensuring user ownership)
+// Create a Movie (ensuring user ownership)
 export const createMovie = async (req, res) => {
     try {
       console.log("Incoming request:", req.body);
-      console.log("User ID:", req.user?.userId); // ✅ Check if user is attached
+      console.log("User ID:", req.user?.userId); // Check if user is attached
   
       const movieData = { ...req.body, user: req.user.userId };
   
@@ -59,7 +59,7 @@ export const createMovie = async (req, res) => {
   };
   
 
-// ✅ Update a Movie (only if owned by the user)
+// Update a Movie (only if owned by the user)
 export const updateMovie = async (req, res) => {
   const { id } = req.params;
   const movieData = req.body;
@@ -82,7 +82,7 @@ export const updateMovie = async (req, res) => {
   }
 };
 
-// ✅ Delete a Movie (only if owned by the user)
+// Delete a Movie (only if owned by the user)
 export const deleteMovie = async (req, res) => {
   const { id } = req.params;
 

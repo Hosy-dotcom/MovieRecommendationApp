@@ -126,7 +126,7 @@ const ExplorePage = () => {
               <VscArrowLeft size={30} />
             </div>
       <div className="p-6 explore-container">
-        <h1 className="text-3xl font-bold mb-6 text-center">Explore Movies</h1>
+        <h1 className="explore-title">Explore Movies</h1>
 
         {/* Tab Buttons */}
         <div className="tab-buttons mb-6">
@@ -186,7 +186,7 @@ const ExplorePage = () => {
                     setStep(0);
                   }}
                 >
-                  🎬 Show Recommendations
+                  Show Recommendations
                 </button>
               </>
             )}

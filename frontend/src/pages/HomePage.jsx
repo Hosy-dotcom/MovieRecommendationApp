@@ -12,7 +12,7 @@ const Homepage = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("username"); // Optional: clear username too
+    localStorage.removeItem("username"); 
     navigate("/menu");
   };
 
@@ -59,7 +59,7 @@ const Homepage = () => {
         <nav className="menu">
           <Link to="/create">Create New Movie</Link>
           <Link to="/tracking">Track/Explore unfinished Series</Link>
-          <Link to="/explore">Find New Movie</Link>
+          <Link to="/explore">Explore Movies</Link>
         </nav>
       </div>
     </div>

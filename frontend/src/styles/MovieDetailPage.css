@@ -1,5 +1,3 @@
-/* MovieDetailPage.css */
-
 .movie-detail-page {
   background-image: url('../../assets/background.png');
   background-size: contain;
@@ -100,7 +98,6 @@ strong {
   font-weight: bold;
 }
 
-/* Seasons and Episodes Styling */
 .seasons-section {
   margin-top: 2rem;
 }
@@ -213,7 +210,6 @@ strong {
   gap: 0.5rem;
 }
 
-/* Starring Input Styles */
 .starring-input {
   display: flex;
   gap: 0.5rem;
@@ -247,7 +243,7 @@ strong {
   display: block;
   margin-bottom: 0.25rem;
 }
-/* Starring List Styles */
+
 .form-group ul {
   list-style: none;
   padding: 0;
@@ -265,7 +261,6 @@ strong {
   }
 }
 
-/* Responsive (Mobile) */
 @media (max-width: 768px) {
 
 .movie-detail-page {
