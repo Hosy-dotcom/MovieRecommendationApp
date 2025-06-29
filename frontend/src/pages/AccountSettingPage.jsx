@@ -11,7 +11,7 @@ const AccountSettings = () => {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
+  const api = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   const handleUsernameToggle = () => {
@@ -30,7 +30,7 @@ const AccountSettings = () => {
 
   const handleUsernameChange = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/update-username", {
+      const response = await fetch(`${api}/api/auth/update-username`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const AccountSettings = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/update-password", {
+      const response = await fetch(`${api}/api/auth/update-password`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import Select from "react-select";
 import "../styles/MovieDetailPage.css";
 
+const API = import.meta.env.VITE_API_URL;
+
 const genreOptions = [
   { value: "Action", label: "Action" },
   { value: "Comedy", label: "Comedy" },
@@ -40,7 +42,7 @@ const MovieDetailPage = () => {
       }
 
       try {
-        const response = await fetch(`http://localhost:5000/api/movies/${id}`, {
+        const response = await fetch(`${API}/api/movies/${id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -93,7 +95,7 @@ const MovieDetailPage = () => {
   const handleUpdate = async () => {
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`http://localhost:5000/api/movies/${id}`, {
+      const res = await fetch(`${API}/api/movies/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -123,7 +125,7 @@ const MovieDetailPage = () => {
 
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`http://localhost:5000/api/movies/${id}`, {
+      const res = await fetch(`${API}/api/movies/${id}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`,

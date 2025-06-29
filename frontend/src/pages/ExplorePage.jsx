@@ -35,6 +35,7 @@ const moodOccasionGenreMap = {
   },
 };
 
+const API = import.meta.env.VITE_API_URL;
 
 
 const ExplorePage = () => {
@@ -63,11 +64,11 @@ const ExplorePage = () => {
     }
   
     try {
-      const response = await fetch("http://localhost:5000/api/movies", {
+      const response = await fetch(`${API}/api/movies`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`, // ✅ Ensure token is sent
+          "Authorization": `Bearer ${token}`, // Ensure token is sent
         },
       });
   
