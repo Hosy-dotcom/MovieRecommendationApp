@@ -14,7 +14,6 @@ function App() {
   return (
     <div>
       <Routes>
-        {/* Redirect from / to /menu */}
         <Route path="/" element={<Navigate to="/menu" replace />} />
 
         <Route path="/home" element={<Homepage />} />
