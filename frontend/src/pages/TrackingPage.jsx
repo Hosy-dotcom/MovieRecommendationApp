@@ -3,6 +3,8 @@ import "../styles/TrackingPage.css";
 import { useNavigate } from "react-router-dom";
 import { VscArrowLeft } from "react-icons/vsc";
 
+const API = import.meta.env.VITE_API_URL;
+
 const TrackingPage = () => {
   const navigate = useNavigate();
 
@@ -24,7 +26,7 @@ const TrackingPage = () => {
     }
   
     try {
-      const response = await fetch("http://localhost:5000/api/movies", {
+      const response = await fetch(`${API}/api/movies`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -97,7 +99,7 @@ const TrackingPage = () => {
     if (!pendingUpdates[seriesId]) return;
   
     try {
-      await fetch(`http://localhost:5000/api/movies/${seriesId}`, {
+      await fetch(`${API}/api/movies/${seriesId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

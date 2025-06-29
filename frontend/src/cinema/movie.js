@@ -1,4 +1,7 @@
 import { create } from 'zustand';
+
+const API = import.meta.env.VITE_API_URL;
+
 export const useMovieStore = create((set) => ({
     movies: [],
     setMovies: (movies) => set({ movies }),
@@ -12,7 +15,7 @@ export const useMovieStore = create((set) => ({
       return { success: false, message: "Unauthorized - No token provided" };
     }
 
-    const res = await fetch("http://localhost:5000/api/movies", {
+    const res = await fetch(`${API}/api/movies`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
