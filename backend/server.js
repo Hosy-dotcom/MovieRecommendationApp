@@ -10,9 +10,13 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const allowedOrigins = [
+  "http://localhost:5173", 
+  "https://movie-recommendation-app.vercel.app" 
+];
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: allowedOrigins,
   methods: "GET,POST,PUT,DELETE",
   allowedHeaders: "Content-Type,Authorization"
 }));
