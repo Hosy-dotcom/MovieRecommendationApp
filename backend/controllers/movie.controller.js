@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import Movie from "../movies/movie.model.js";
 
-// ✅ Get a Movie by ID (only if owned by the user)
+//Get a Movie by ID (only if owned by the user)
 export const getMovieById = async (req, res) => {
   const { id } = req.params;
 
@@ -10,7 +10,7 @@ export const getMovieById = async (req, res) => {
   }
 
   try {
-    const movie = await Movie.findOne({ _id: id, user: req.user.userId }); // ✅ Only fetch user's movie
+    const movie = await Movie.findOne({ _id: id, user: req.user.userId });
 
     if (!movie) {
       return res.status(404).json({ success: false, message: "Movie not found or unauthorized" });
@@ -23,10 +23,10 @@ export const getMovieById = async (req, res) => {
   }
 };
 
-// ✅ Get all movies belonging to the logged-in user
+//Get all movies belonging to the logged-in user
 export const getMovies = async (req, res) => {
     try {
-      console.log("User ID:", req.user?.userId); // ✅ Ensure user ID is available
+      console.log("User ID:", req.user?.userId); 
       const movies = await Movie.find({ user: req.user.userId }); 
       res.status(200).json({ success: true, data: movies });
     } catch (error) {
@@ -36,11 +36,11 @@ export const getMovies = async (req, res) => {
   };
   
 
-// Create a Movie (ensuring user ownership)
+//Create a Movie (ensuring user ownership)
 export const createMovie = async (req, res) => {
     try {
       console.log("Incoming request:", req.body);
-      console.log("User ID:", req.user?.userId); // Check if user is attached
+      console.log("User ID:", req.user?.userId); 
   
       const movieData = { ...req.body, user: req.user.userId };
   
@@ -59,7 +59,7 @@ export const createMovie = async (req, res) => {
   };
   
 
-// Update a Movie (only if owned by the user)
+//Update a Movie (only if owned by the user)
 export const updateMovie = async (req, res) => {
   const { id } = req.params;
   const movieData = req.body;
@@ -82,7 +82,7 @@ export const updateMovie = async (req, res) => {
   }
 };
 
-// Delete a Movie (only if owned by the user)
+//Delete a Movie (only if owned by the user)
 export const deleteMovie = async (req, res) => {
   const { id } = req.params;
 
