@@ -12,14 +12,23 @@ const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
   "http://localhost:5173", 
-  "https://movie-recommendation-app.vercel.app" 
+  "https://movie-recommendation-app.vercel.app", 
+  "https://movie-recommendation-app-tan.vercel.app" 
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   methods: "GET,POST,PUT,DELETE",
-  allowedHeaders: "Content-Type,Authorization"
+  allowedHeaders: "Content-Type,Authorization",
+  credentials: true 
 }));
+
 
 app.use(express.json()); 
 
