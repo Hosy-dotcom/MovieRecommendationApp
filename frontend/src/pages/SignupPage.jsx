@@ -7,11 +7,11 @@ const SignupPage = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    password: ""
+    password: "",
   });
 
   const handleChange = (e) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSignup = async (e) => {
@@ -20,9 +20,9 @@ const SignupPage = () => {
       const res = await fetch("http://localhost:5000/api/auth/signup", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
       const data = await res.json();
@@ -40,13 +40,52 @@ const SignupPage = () => {
 
   return (
     <div className="signup-container">
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSignup}>
-        <input type="text" name="username" placeholder="Username" onChange={handleChange} required />
-        <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
-        <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
-        <button type="submit">Register</button>
-      </form>
+      <div className="back-button" onClick={() => navigate("/menu")}>
+        &larr; Back
+      </div>
+      <div className="contents">
+        <h1>Sign Up</h1>
+
+        <form className="signup-form" onSubmit={handleSignup}>
+          <div className="form-group">
+            <label>Username:</label>
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              placeholder="Enter your username"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Email:</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Password:</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <button type="submit" className="submit-btn">Register</button>
+        </form>
+      </div>
     </div>
   );
 };

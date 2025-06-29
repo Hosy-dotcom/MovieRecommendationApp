@@ -16,9 +16,28 @@ const TrackingPage = () => {
   }, []);
 
   const fetchSeries = async () => {
+    const token = localStorage.getItem("token"); 
+  
+    if (!token) {
+      alert("Unauthorized: Please log in first!");
+      return;
+    }
+  
     try {
-      const response = await fetch("http://localhost:5000/api/movies");
+      const response = await fetch("http://localhost:5000/api/movies", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`, 
+        },
+      });
+  
       const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || "Unauthorized or server error");
+      }
+  
       if (data.success) {
         const seriesData = data.data.filter((item) => item.movie_or_series === "Series");
         const defaultSeasons = {};
@@ -50,12 +69,10 @@ const TrackingPage = () => {
     const clickedEpisode = episodes[episodeIndex];
 
     if (clickedEpisode.watched) {
-      // Unwatch clicked and all after
       for (let i = episodeIndex; i < episodes.length; i++) {
         episodes[i].watched = false;
       }
     } else {
-      // Watch clicked and all before
       for (let i = 0; i <= episodeIndex; i++) {
         episodes[i].watched = true;
       }
@@ -70,19 +87,29 @@ const TrackingPage = () => {
   };
 
   const submitUpdates = async (seriesId) => {
+    const token = localStorage.getItem("token"); 
+  
+    if (!token) {
+      alert("Unauthorized: Please log in first!");
+      return;
+    }
+  
     if (!pendingUpdates[seriesId]) return;
-
+  
     try {
       await fetch(`http://localhost:5000/api/movies/${seriesId}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`, 
+        },
         body: JSON.stringify({ seasons: pendingUpdates[seriesId] }),
       });
-
+  
       const newPendingUpdates = { ...pendingUpdates };
       delete newPendingUpdates[seriesId];
       setPendingUpdates(newPendingUpdates);
-
+  
       alert("Episodes updated successfully!");
     } catch (error) {
       console.error("Error updating episode status:", error);
@@ -92,15 +119,18 @@ const TrackingPage = () => {
   if (loading) return <p>Loading series...</p>;
 
   return (
-    <div className="tracking-page">
-      {/* Back Button */}
-      <div className="back-button" onClick={() => navigate("/")}>
-        <VscArrowLeft size={30} />
-      </div>
+  <div className="tracking-page">
+    {/* Back Button */}
+    <div className="back-button" onClick={() => navigate("/home")}>
+      <VscArrowLeft size={30} />
+    </div>
 
-      {/* Series list wrapper */}
-      <div className="series-list">
-        {series.map((show) => {
+    {/* Series list wrapper */}
+    <div className="series-list">
+      {series.length === 0 ? (
+        <p className="empty-message">No series found. Start adding your favorites to track progress!</p>
+      ) : (
+        series.map((show) => {
           const hasMultipleSeasons = show.seasons.length > 1;
           const selectedSeason = selectedSeasons[show._id] || 1;
           const selectedSeasonIndex = selectedSeason - 1;
@@ -149,10 +179,12 @@ const TrackingPage = () => {
               </div>
             </div>
           );
-        })}
-      </div>
+        })
+      )}
     </div>
-  );
+  </div>
+);
+
 };
 
 export default TrackingPage;

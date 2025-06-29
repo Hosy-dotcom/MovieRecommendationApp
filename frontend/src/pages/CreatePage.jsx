@@ -27,13 +27,12 @@ const CreatePage = () => {
     setNewMovie({ ...newMovie, [name]: value });
   };
 
-  const handleCheckboxChange = () => {
-    const toggledIsSeries = !newMovie.isSeries;
+  const handleTypeChange = (isSeries) => {
     setNewMovie({
       ...newMovie,
-      isSeries: toggledIsSeries,
-      numberOfSeasons: 1,
-      episodesPerSeason: toggledIsSeries ? [1] : [],
+      isSeries,
+      numberOfSeasons: isSeries ? 1 : 1,
+      episodesPerSeason: isSeries ? [1] : [],
     });
   };
 
@@ -66,7 +65,7 @@ const CreatePage = () => {
 
   const handleEpisodeCountChange = (index, value) => {
     const updated = [...newMovie.episodesPerSeason];
-    updated[index] = parseInt(value, 10) || 0;
+    updated[index] = Math.max(1, parseInt(value, 10) || 1);
     setNewMovie({ ...newMovie, episodesPerSeason: updated });
   };
 
@@ -76,12 +75,12 @@ const CreatePage = () => {
     const imageUrl = newMovie.image.trim() !== "" ? newMovie.image.trim() : "../../assets/placeholder.jpg";
     const seasons = newMovie.isSeries
       ? newMovie.episodesPerSeason.map((count, index) => ({
-          season_number: index + 1,
-          episodes: Array.from({ length: count }, (_, i) => ({
-            episode_number: i + 1,
-            watched: false,
-          })),
-        }))
+        season_number: index + 1,
+        episodes: Array.from({ length: count }, (_, i) => ({
+          episode_number: i + 1,
+          watched: false,
+        })),
+      }))
       : [];
 
     const movieData = {
@@ -100,6 +99,10 @@ const CreatePage = () => {
       return;
     }
 
+    // Success alert here
+    alert("Movie created successfully!");
+
+    // Reset form
     setNewMovie({
       name: "",
       starring: [],
@@ -113,34 +116,36 @@ const CreatePage = () => {
     setStarringInput("");
   };
 
+
   const genreOptions = [
-    { value: "action", label: "Action" },
-    { value: "comedy", label: "Comedy" },
-    { value: "drama", label: "Drama" },
-    { value: "horror", label: "Horror" },
-    { value: "romance", label: "Romance" },
-    { value: "thriller", label: "Thriller" },
-    { value: "sci-fi", label: "Sci-Fi" },
-    { value: "fantasy", label: "Fantasy" },
-    { value: "animation", label: "Animation" },
-    { value: "documentary", label: "Documentary" },
-    { value: "crime", label: "Crime" },
-    { value: "sliceoflife", label: "Slice of Life" },
+    { value: "Action", label: "Action" },
+    { value: "Comedy", label: "Comedy" },
+    { value: "Drama", label: "Drama" },
+    { value: "Horror", label: "Horror" },
+    { value: "Romance", label: "Romance" },
+    { value: "Thriller", label: "Thriller" },
+    { value: "Sci-fi", label: "Sci-Fi" },
+    { value: "Fantasy", label: "Fantasy" },
+    { value: "Animation", label: "Animation" },
+    { value: "Documentary", label: "Documentary" },
+    { value: "Crime", label: "Crime" },
+    { value: "Sliceoflife", label: "Slice of Life" },
   ];
 
   return (
     <div className="container">
-        {/* Back Button */}
-        <div className="back-button" onClick={() => navigate("/")}>
-          <VscArrowLeft size={30} />
-        </div>
+      <div className="back-button" onClick={() => navigate("/home")}>
+        <VscArrowLeft size={30} />
+      </div>
       <div className="contents">
-        <h1>Add new movies to your movie list ^_^ </h1>
+        <h1>Add new movies to your movie list ^_^</h1>
 
         <form className="create-form" onSubmit={handleSubmit}>
           {/* Name */}
           <div className="form-group">
-            <label>Name:</label>
+            <label>
+              Name:
+            </label>
             <input
               type="text"
               name="name"
@@ -182,11 +187,11 @@ const CreatePage = () => {
             <label>Type:</label>
             <div>
               <label>
-                <input type="radio" checked={!newMovie.isSeries} onChange={handleCheckboxChange} />
+                <input type="radio" name="type" checked={!newMovie.isSeries} onChange={() => handleTypeChange(false)} />
                 Movie
               </label>
               <label>
-                <input type="radio" checked={newMovie.isSeries} onChange={handleCheckboxChange} />
+                <input type="radio" name="type" checked={newMovie.isSeries} onChange={() => handleTypeChange(true)} />
                 Series
               </label>
             </div>
@@ -212,7 +217,6 @@ const CreatePage = () => {
                     min={1}
                     value={val}
                     onChange={(e) => handleEpisodeCountChange(i, e.target.value)}
-                    placeholder="e.g., 8"
                     required
                   />
                 </div>
@@ -220,7 +224,7 @@ const CreatePage = () => {
             </>
           )}
 
-          {/* Image */}
+          {/* Image URL */}
           <div className="form-group">
             <label>Image URL:</label>
             <input

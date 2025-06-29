@@ -1,41 +1,82 @@
-.menu-container{
-    background-image: url('../../assets/background.png');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    font-family: 'Courier New', Courier, monospace;
-    text-align: center;
-    padding: 20px;
+.menu-container {
+  background-image: url('../../assets/background.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  justify-content: center; 
+  height: 100vh;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  padding: 20px;
+}
+
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-title {
+  font-size: 3rem;               
+  font-weight: bold;    
+  text-align: center;           
+  color: #000000;                  
+  text-shadow: 3px 3px 6px rgba(255, 255, 255, 5.2); 
+  margin-bottom: 2rem;
+  padding: 0 20px;               
+  max-width: 100vw;                
+  line-height: 1.2;                
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+
+}
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center; 
+}
+
+.menu-buttons button {
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  border: 2px solid #000;
+  background-color: #000;
+  color: #ffffff; 
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  width: 200px;
+}
+
+.menu-buttons button:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+@media (max-width: 1200px) {
+  .menu-container {
+    background-size: contain;
+    background-position: center top;
+    background-repeat: repeat-y;
+    max-height: 100vh; 
+    width: 100vw;      
+    box-sizing : border-box
   }
-  
+}
+
+@media (max-width: 768px) {
+  .menu-container {
+    background-size: contain;
+    background-position: center top;
+    background-repeat: repeat-y;
+  }
   .menu-title {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    padding-bottom: 10px;
+    font-size: 1.8rem; 
   }
-  
-  .menu-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .menu-buttons button {
-    padding: 12px 24px;
-    font-size: 1.2rem;
-    border: 2px solid #000;
-    background-color: transparent;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: inherit;
-  }
-  
-  .menu-buttons button:hover {
-    background-color: #000;
-    color: #fff;
-  }
-  
+}
