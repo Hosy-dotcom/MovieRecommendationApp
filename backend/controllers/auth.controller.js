@@ -14,13 +14,14 @@ if (!JWT_SECRET) {
 export const signup = async (req, res) => {
   try {
     const { username, email, password } = req.body;
+    const emailLower = email.toLowerCase();
+    const existingUser = await User.findOne({ email: emailLower });
 
-    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ success: false, message: "Email already registered" });
     }
 
-    const user = new User({ username, email, password });
+    const user = new User({ username, email: emailLower, password });
     await user.save();
 
     res.status(201).json({ success: true, message: "User created successfully" });
@@ -33,8 +34,9 @@ export const signup = async (req, res) => {
 export const signin = async (req, res) => {
   try {
     const { email, password } = req.body;
+    const emailLower = email.toLowerCase();
+    const user = await User.findOne({ email: emailLower });
 
-    const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ success: false, message: "Invalid credentials" });
     }
