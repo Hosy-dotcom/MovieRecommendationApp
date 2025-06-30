@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "../styles/CreatePage.css";
 import { useMovieStore } from "../cinema/movie";
 import { VscArrowLeft } from "react-icons/vsc";
+import placeholder from "../../assets/placeholder.jpg";
+
 
 const CreatePage = () => {
   const [newMovie, setNewMovie] = useState({
@@ -15,6 +17,8 @@ const CreatePage = () => {
     numberOfSeasons: 1,
     episodesPerSeason: [],
   });
+
+  const [episodesInput, setEpisodesInput] = useState(["1"]);
 
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [starringInput, setStarringInput] = useState("");
@@ -56,23 +60,32 @@ const CreatePage = () => {
   const handleSeasonsChange = (e) => {
     const numSeasons = parseInt(e.target.value, 10);
     const newEpisodesPerSeason = Array(numSeasons).fill(1);
+    const newEpisodesInput = Array(numSeasons).fill("1");
     setNewMovie({
       ...newMovie,
       numberOfSeasons: numSeasons,
       episodesPerSeason: newEpisodesPerSeason,
     });
+    setEpisodesInput(newEpisodesInput);
   };
 
-  const handleEpisodeCountChange = (index, value) => {
+  const handleEpisodeInputChange = (index, value) => {
+  const newInputs = [...episodesInput];
+  newInputs[index] = value;
+  setEpisodesInput(newInputs);
+  const parsed = parseInt(value, 10);
+  if (!isNaN(parsed) && parsed > 0) {
     const updated = [...newMovie.episodesPerSeason];
-    updated[index] = Math.max(1, parseInt(value, 10) || 1);
+    updated[index] = parsed;
     setNewMovie({ ...newMovie, episodesPerSeason: updated });
-  };
+  }
+};
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const imageUrl = newMovie.image.trim() !== "" ? newMovie.image.trim() : "../../assets/placeholder.jpg";
+    const imageUrl = newMovie.image.trim() !== "" ? newMovie.image.trim() : placeholder;
     const seasons = newMovie.isSeries
       ? newMovie.episodesPerSeason.map((count, index) => ({
         season_number: index + 1,
@@ -215,8 +228,8 @@ const CreatePage = () => {
                   <input
                     type="number"
                     min={1}
-                    value={val}
-                    onChange={(e) => handleEpisodeCountChange(i, e.target.value)}
+                    value={episodesInput[i]}
+                    onChange={(e) =>  handleEpisodeInputChange(i, e.target.value)}
                     required
                   />
                 </div>
