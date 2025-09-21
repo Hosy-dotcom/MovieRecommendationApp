@@ -13,7 +13,8 @@ const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   "http://localhost:5173", 
   "https://movie-recommendation-app.vercel.app", 
-  "https://movie-recommendation-app-tan.vercel.app" 
+  "https://movie-recommendation-app-tan.vercel.app",
+   "https://movie-recommendation-1e53qenxd-hnin-oo-shwe-yis-projects.vercel.app"
 ];
 
 app.use(cors({
